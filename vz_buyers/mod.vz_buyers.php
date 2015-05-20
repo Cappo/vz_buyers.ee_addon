@@ -42,10 +42,10 @@ class Vz_buyers {
 		$this->EE->lang->loadfile('vz_buyers');
 		
         // Get everything we need from the database
-        $orders = $this->EE->db->select('store_order_items.order_id, store_order_items.item_qty, store_orders.order_date, store_orders.order_email, store_orders.billing_name')
-                    ->from('store_order_items')
-                    ->where('store_order_items.entry_id', $_GET['entry_id'])
-                    ->join('store_orders', 'store_orders.order_id = store_order_items.order_id')
+        $orders = $this->EE->db->select('exp_store_order_items.order_id, exp_store_order_items.item_qty, exp_store_orders.order_date, exp_store_orders.order_email, exp_store_orders.billing_first_name, exp_store_orders.billing_last_name')
+                    ->from('exp_store_order_items')
+                    ->join('exp_store_orders', 'exp_store_orders.id = exp_store_order_items.order_id')
+					->where('exp_store_order_items.entry_id', $_GET['entry_id'])
                     ->get()->result_array();
         
         $csv = implode(',', array(
@@ -62,9 +62,9 @@ class Vz_buyers {
             $csv .= NL . implode(',', array(
                 $order['order_id'],
                 $order['item_qty'],
-                '"'.str_replace('"', '""', $order['billing_name']).'"',
+                '"'.str_replace('"', '""', $order['billing_first_name']).' '.str_replace('"', '""', $order['billing_last_name']).'"',
                 '"'.str_replace('"', '""', $order['order_email']).'"',
-                $this->EE->localize->set_human_time($order['order_date'])
+                $this->EE->localize->human_time($order['order_date'])
             ));
         }
         

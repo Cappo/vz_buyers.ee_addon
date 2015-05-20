@@ -17,9 +17,9 @@ foreach ($orders as $order)
     $this->table->add_row(
         $order['order_id'],
         $order['item_qty'],
-        "<a href='mailto:{$order['order_email']}'>{$order['billing_name']}</a>",
-        $this->localize->set_human_time($order['order_date']),
-        '<a href="'.BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=store'.AMP.'method=orders'.AMP.'order_id='.$order['order_id'].'">'.lang('col_details').'</a>'
+        "<a href='mailto:{$order['order_email']}'>{$order['billing_first_name']} {$order['billing_last_name']}</a>",
+        $this->localize->human_time($order['order_date']),
+        '<a href="'.BASE.AMP.'C=addons_modules'.AMP.'M=show_module_cp'.AMP.'module=store'.AMP.'sc=orders'.AMP.'sm=show'.AMP.'id='.$order['order_id'].'">'.lang('col_details').'</a>'
     );
 }
 
