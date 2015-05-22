@@ -8,3 +8,5 @@ Installation
 ------------
 
 Download and unzip the add-on. Upload the "vz_buyers" folder to your /system/expression_engine/third_party/ folder. Finally, enable the fieldtype and module in your control panel. Finally, add a new VZ Buyers field to the channel(s) containing your products.
+
+
